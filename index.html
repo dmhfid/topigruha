@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upix Club | Premium Access</title>
+    <style>
+        /* Цветовая палитра: Темный фон + Яркий Неон (Киберпанк вайб) */
+        :root {
+            --bg-black: #050507;
+            --bg-card: #0c0d12;
+            --neon-cyan: #00f3ff;
+            --neon-purple: #bc13fe;
+            --neon-blue: #3a86ff;
+            --text-main: #f8f9fa;
+            --text-muted: #8b92a5;
+            --border-color: #1a1c23;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(188, 19, 254, 0.05), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(0, 243, 255, 0.05), transparent 25%);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* --- Шапка сайта --- */
+        .header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .logo {
+            font-size: 3.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            background: linear-gradient(to right, var(--neon-cyan), var(--neon-purple));
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px rgba(188, 19, 254, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--neon-cyan);
+            margin-bottom: 2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .warning-box {
+            background-color: rgba(12, 13, 18, 0.8);
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            border-left: 4px solid var(--neon-cyan);
+            color: var(--text-muted);
+            padding: 1.2rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin-bottom: 2rem;
+            text-align: left;
+            max-width: 700px;
+            line-height: 1.6;
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.05);
+        }
+
+        .warning-box strong {
+            color: var(--neon-cyan);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- Кнопки с неоновым свечением --- */
+        .btn-neon {
+            background: transparent;
+            color: var(--text-main);
+            text-decoration: none;
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 1rem;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--neon-purple);
+            box-shadow: 0 0 10px rgba(188, 19, 254, 0.2), inset 0 0 10px rgba(188, 19, 254, 0.1);
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn-neon:hover {
+            background: var(--neon-purple);
+            box-shadow: 0 0 20px rgba(188, 19, 254, 0.6), inset 0 0 15px rgba(255, 255, 255, 0.2);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .btn-cyan {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.2), inset 0 0 10px rgba(0, 243, 255, 0.1);
+        }
+
+        .btn-cyan:hover {
+            background: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.6);
+            color: #000;
+        }
+
+        /* --- Блок Telegram --- */
+        .tg-section {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(188, 19, 254, 0.3);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 3.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(188, 19, 254, 0.1);
+        }
+
+        .tg-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(188, 19, 254, 0.1) 0%, transparent 60%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .tg-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .tg-title {
+            font-size: 2.2rem;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            font-weight: 900;
+        }
+
+        .tg-desc {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 1.5rem auto;
+            font-size: 1.05rem;
+        }
+
+        /* Механика копирования промокода */
+        .promo-box {
+            background: rgba(0,0,0,0.5);
+            border: 1px dashed var(--neon-purple);
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .promo-box:hover {
+            background: rgba(188, 19, 254, 0.1);
+        }
+
+        .promo-text {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--neon-cyan);
+            letter-spacing: 2px;
+        }
+
+        .promo-hint {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* --- Сетка Игр --- */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .game-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.2rem;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .game-card:hover {
+            border-color: var(--neon-cyan);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.15);
+        }
+
+        .game-image {
+            width: 100%;
+            height: 170px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1.2rem;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .game-title {
+            font-size: 1.4rem;
+            color: var(--text-main);
+            margin-bottom: 0.3rem;
+            font-weight: 800;
+        }
+
+        .game-badge {
+            color: var(--neon-purple);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .game-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        /* Всплывающее уведомление */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--neon-cyan);
+            color: #000;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1rem;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        /* Подвал */
+        .footer {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .logo { font-size: 2.5rem; }
+            .tg-section { padding: 1.5rem; }
+            .tg-title { font-size: 1.8rem; }
+            .game-image { height: 150px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <!-- Шапка сайта -->
+    <header class="header">
+        <h1 class="logo">Upix Club</h1>
+        <p class="subtitle">Алгоритмы • Тактики • Максимальный профит</p>
+        
+        <div class="warning-box">
+            <strong>⚠️ Обязательно к прочтению:</strong>
+            1. <b>Отключайте VPN.</b> Запуск игр с включенным VPN может сбить алгоритм отдачи и аннулировать ваши приветственные бонусы.<br>
+            2. <b>Контролируйте банк.</b> Любые тактики повышают шанс выигрыша, но не отменяют риски. Делайте депозиты только на те суммы, с которыми морально готовы расстаться.<br>
+            3. <b>Строго 18+.</b> Весь контент и схемы на сайте предназначены исключительно для совершеннолетних пользователей.
+        </div>
+    </header>
+
+    <!-- Блок Telegram с механикой промокода -->
+    <section class="tg-section">
+        <div class="tg-content">
+            <h2 class="tg-title">Закрытый канал Upix</h2>
+            <p class="tg-desc">Ежедневные связки, баги слотов и схемы безопасного заработка. Забирай бонус на первый депозит и залетай к нам.</p>
+            
+            <div class="promo-box" onclick="copyPromo('UPIXWIN')">
+                <span class="promo-text">UPIXWIN</span>
+                <span class="promo-hint">Нажми, чтобы скопировать (+600% и 500FS)</span>
+            </div>
+
+            <br>
+            <a href="https://t.me/upixuk" class="btn-neon" target="_blank" rel="noopener" style="max-width: 300px;">
+                🔓 Открыть Telegram
+            </a>
+        </div>
+    </section>
+
+    <!-- Сетка Игр -->
+    <section class="games-grid">
+        
+        <!-- Игра 1 -->
+        <div class="game-card">
+            <img src="https://bonustiime.com/wp-content/uploads/2025/09/Minedrop-slot-feature-multiplier-2-1024x576.webp" alt="MineDrop" class="game-image">
+            <h3 class="game-title">MineDrop</h3>
+            <span class="game-badge">Топ Выплат</span>
+            <p class="game-desc">Спускайся в шахты и ищи кристаллы. Аккуратно обходи мины, чтобы умножить свою начальную ставку до x1000.</p>
+            <a href="https://r1whtrt.life/?p=625r" class="btn-neon btn-cyan" target="_blank">Играть сейчас</a>
+        </div>
+
+        <!-- Игра 2 -->
+        <div class="game-card">
+            <img src="https://galaxsys.co/media/2024/02/26/c0952c3af55efd06b19459ccd6e8386d2fbbef10.webp" alt="TowerRush" class="game-image">
+            <h3 class="game-title">TowerRush</h3>
+            <span class="game-badge">Быстрые Раунды</span>
+            <p class="game-desc">Строй башню и забирай кэш на каждом новом этаже. Чем выше ты заберешься, тем жестче будет итоговый множитель.</p>
+            <a href="https://one-vv5058.com/casino/play/v_galaxsysgames:towerrush?p=625r" class="btn-neon btn-cyan" target="_blank">Играть сейчас</a>
+        </div>
+
+        <!-- Игра 3 -->
+        <div class="game-card">
+            <img src="https://static.templodeslots.es/pict/1197443/Aviamasters.png" alt="Aviamaster" class="game-image">
+            <h3 class="game-title">Aviamaster</h3>
+            <span class="game-badge">Высокий Множитель</span>
+            <p class="game-desc">Классическая и любимая краш-механика. Следи за радарами и успей забрать свой выигрыш до того, как самолет улетит.</p>
+            <a href="https://one-vv5058.com/casino/play/v_bgmng:aviamasters?p=625r" class="btn-neon btn-cyan" target="_blank">Играть сейчас</a>
+        </div>
+
+        <!-- Игра 4 -->
+        <div class="game-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrvcbUCy2NvQ8CuXuv-JJhNzgkA6TmE2SsgZVsDCQVQQ&s=10" alt="Ice Fishing" class="game-image">
+            <h3 class="game-title">Ice Fishing</h3>
+            <span class="game-badge">Скрытые Бонусы</span>
+            <p class="game-desc">Спокойный геймплей, но с дикими иксами. Лови редкую рыбу подо льдом и активируй прибыльные бонус-раунды.</p>
+            <a href="https://one-vv5058.com/casino/play/v_evolution:1winicefishing?p=625r" class="btn-neon btn-cyan" target="_blank">Играть сейчас</a>
+        </div>
+
+        <!-- Игра 5 -->
+        <div class="game-card">
+            <img src="https://media.licdn.com/dms/image/v2/D4D22AQGWI1wPHhq83A/feedshare-shrink_800/feedshare-shrink_800/0/1689852646578?e=2147483647&v=beta&t=usXhsgeRUuHPDUuiW4jzJ3TOQUCDjGtgjqzSeviSXMY" alt="Doodle Crash" class="game-image">
+            <h3 class="game-title">Doodle Crash</h3>
+            <span class="game-badge">Хит Недели</span>
+            <p class="game-desc">Прыгай по платформам всё выше и уворачивайся от преград. Динамичная игра с растущим кушем на каждом уровне.</p>
+            <a href="https://one-vv5058.com/casino/play/v_barbarabang:doodlecrash?p=625r" class="btn-neon btn-cyan" target="_blank">Играть сейчас</a>
+        </div>
+
+        <!-- Игра 6 -->
+        <div class="game-card">
+            <img src="https://images.sigma.world/Falling-Pickaxe-Pixmove-Games.png" alt="Falling Pickaxe" class="game-image">
+            <h3 class="game-title">Falling Pickaxe</h3>
+            <span class="game-badge">Эксклюзив</span>
+            <p class="game-desc">Лови момент! Управляй падающей киркой, собирай золотые слитки и сокровища в бесконечном динамичном падении.</p>
+            <a href="https://one-vv5058.com/casino/play/v_pixmove:fallingpickaxe?p=625r" class="btn-neon btn-cyan" target="_blank">Играть сейчас</a>
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        <p>🔞 Upix Club Premium © 2026. Все права защищены.<br>
+        Играйте ответственно.</p>
+    </footer>
+
+</div>
+
+<!-- Уведомление -->
+<div class="toast" id="toast">✅ Промокод скопирован!</div>
+
+<script>
+    // Скрипт для копирования промокода по клику
+    function copyPromo(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        });
+    }
+</script>
+
+</body>
+</html>
